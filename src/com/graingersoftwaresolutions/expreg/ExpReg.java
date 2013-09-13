@@ -16,8 +16,8 @@ public class ExpReg {
 	 * To find linear regression, you need the slope and y-intercept.
 	 * 
 	 * To find the slope:    (n = number of points)    Slope = n * Sum(xy) - Sum(x) * Sum(y)
-	 * 												   _____________________________________
-	 * 													    n * Sum(x^2) - (Sum(x))^2
+	 * 					           _____________________________________
+	 * 							 n * Sum(x^2) - (Sum(x))^2
 	 * 
 	 * 
 	 * To find the y-intercept: ( m = slope )                Sum(y) - m * Sum(x)
