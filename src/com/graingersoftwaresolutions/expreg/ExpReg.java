@@ -31,7 +31,8 @@ public class ExpReg {
 	double bigA;
 	double rValue;
 	
-	protected double doTheWork(ArrayList<String> weightArray, ArrayList<String> priceArray){
+	//This method calls each of the subsequent methods to build the equation.
+	protected void doTheWork(ArrayList<String> weightArray, ArrayList<String> priceArray){
 		double slope = 0;
 		rValue = 0;
 		ArrayList<String> logArray = getLogYArray(priceArray);
@@ -42,14 +43,18 @@ public class ExpReg {
 		double d = getSumXSquared(weightArray);
 		double e = getSquaredSumX(weightArray);
 		
+		//Calculate the slope
 		slope = ((n*a) - (b*c)) / ((n*d) - e);
+		//Calculate the y-intercept
 		double bValue = (getSumY(logArray) - slope * (getSumX(weightArray))) / n;
 		
+		//Calculate A and r
 		bigA = Math.pow(10, bValue);
 		rValue = Math.pow(10, slope);
-		return slope;
+		
 	}
-
+	
+	//Using the priceArray, create a new array which contains the logs of the corresponding prices
 	protected ArrayList<String> getLogYArray(ArrayList<String> priceArray){
 		ArrayList<String> logArray = new ArrayList<String>();
 		for (int i = 0; i < priceArray.size(); i ++){
@@ -60,6 +65,7 @@ public class ExpReg {
 		return logArray;
 	}
 	
+	//Using both arrays, get the sum of each x value (weight) multiplied by the corresponding y (price)
 	protected double getSumXTimesY(ArrayList<String> weightArray, ArrayList<String> priceArray){
 		double sumXTimesY = 0;
 		for (int i = 0; i < weightArray.size(); i ++){
@@ -68,6 +74,7 @@ public class ExpReg {
 		return sumXTimesY;
 	}
 	
+	//Using the weightArray, get the sum of the x values (weights)
 	protected double getSumX(ArrayList<String> weightArray){
 		double sumX = 0;
 		for (int i = 0; i < weightArray.size(); i ++){
@@ -76,6 +83,7 @@ public class ExpReg {
 		return sumX;
 	}
 	
+	//Using the logPriceArray, get the sum of each of the y values (logPrices)
 	protected double getSumY(ArrayList<String> logPriceArray){
 		double sumY = 0;
 		for (int i = 0; i < logPriceArray.size(); i ++){
@@ -85,6 +93,7 @@ public class ExpReg {
 		
 	}
 	
+	//Using the weightArray, get the sum of the values, then square it.
 	protected double getSquaredSumX(ArrayList<String> weightArray){
 		double squaredSumX = 0;
 		double sum = 0;
@@ -95,6 +104,7 @@ public class ExpReg {
 		return squaredSumX;
 	}
 	
+	//Using the weightArray, get the sum of the squares of the x values (weights)
 	protected double getSumXSquared(ArrayList<String> weightArray){
 		double sumXSquared = 0;
 		for (int i = 0; i < weightArray.size(); i ++){
@@ -104,10 +114,11 @@ public class ExpReg {
 	}
 	
 	
-	
+	//return A for the final equation
 	protected double getA(){
 		return bigA;
 	}
+	//return r for the final equation
 	protected double getR(){
 		return rValue;
 	}
